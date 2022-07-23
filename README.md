@@ -1,7 +1,7 @@
 # PSVshellPlus
 Advanced OC&Info plugin for PS Vita
 
-Provides fully GPU accelerated HUD, accurate memory and FPS tracking.
+Provides fully GPU accelerated HUD, accurate memory and FPS tracking with full Quick Menu integration.
 
 ![alt text](https://github.com/GrapheneCt/PSVshellPlus/raw/main/guide.jpg)
 
