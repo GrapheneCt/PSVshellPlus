@@ -6,6 +6,7 @@ Provides fully GPU accelerated HUD, accurate memory and FPS tracking with full Q
 ![alt text](https://github.com/GrapheneCt/PSVshellPlus/raw/main/guide.jpg)
 
 ## Installation
+0. PSVshellPlus is not compatible with original PSVshell profiles. If you used PSVshell before, please manually clean ```ur0:data/PSVshell/profiles/``` before using PSVshellPlus
 1. Download latest release
 2. Install plugins:
 ```
