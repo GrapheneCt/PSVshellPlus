@@ -3,6 +3,9 @@
 #include <kernel.h>
 #include <paf.h>
 
+#include "psvs.h"
+#include "hud.h"
+
 namespace psvs
 {
 	class Impose
@@ -109,6 +112,8 @@ namespace psvs
 		};
 
 		static SceVoid Update(ScePVoid arg);
+		static Hud::Position GetHudPosition();
+		static SceVoid SetHudPosition(Hud::Position pos);
 
 		Impose(paf::Plugin *plugin, paf::ui::Box *root);
 

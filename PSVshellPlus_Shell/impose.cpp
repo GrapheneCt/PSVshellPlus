@@ -66,6 +66,7 @@ namespace psvs
 			arraySize = sizeof(k_gpuClock) / sizeof(SceInt32);
 			arrayPtr = k_gpuClock;
 			break;
+			/*
 		case psvs_button_impose_bus_down:
 			currentClock = clock.bus;
 			clockSet = psvsSetBusClockFrequency;
@@ -80,6 +81,7 @@ namespace psvs
 			arraySize = sizeof(k_busClock) / sizeof(SceInt32);
 			arrayPtr = k_busClock;
 			break;
+			*/
 		case psvs_button_impose_xbar_down:
 			currentClock = clock.xbar;
 			clockSet = psvsSetGpuXbarClockFrequency;
@@ -366,6 +368,20 @@ namespace psvs
 
 			obj->oldTick = tickNow;
 			obj->oldClock = clock;
+		}
+	}
+
+	Hud::Position Impose::GetHudPosition()
+	{
+		return (Hud::Position)s_hudPos;
+	}
+
+	SceVoid Impose::SetHudPosition(Hud::Position pos)
+	{
+		s_hudPos = pos;
+		Hud *currHud = Hud::GetCurrentHud();
+		if (currHud != SCE_NULL) {
+			currHud->SetPosition(pos);
 		}
 	}
 

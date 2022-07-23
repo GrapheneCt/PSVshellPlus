@@ -1,10 +1,13 @@
 #include <kernel.h>
 #include <appmgr.h>
+#include <power.h>
 #include <libdbg.h>
 #include <paf.h>
 
 #include "global.h"
 #include "utils.h"
+#include "impose.h"
+#include "hud.h"
 #include "psvs.h"
 #include "tracker.h"
 #include "profile.h"
@@ -30,7 +33,6 @@ namespace tracker
 		SceBool appChanged = SCE_FALSE;
 
 		if (tickNow - s_tickOld > PSVS_APP_UPDATE_WINDOW_USEC) {
-
 			appId = sceAppMgrGetAppIdByAppId(SCE_APPMGR_APP_ID_ACTIVE);
 			if (appId > 0) {
 				if (s_currAppId != appId) {
@@ -68,7 +70,7 @@ namespace tracker
 				if (s_currProfile) {
 					psvsSetArmClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_CPU]);
 					psvsSetGpuClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_GPU_ES4]);
-					psvsSetBusClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_BUS]);
+					//psvsSetBusClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_BUS]);
 					psvsSetGpuXbarClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_GPU_XBAR]);
 					psvsClockFrequencyLockProc(s_currPid, (PsvsLockDevice)s_currProfile->lock);
 				}
@@ -106,6 +108,26 @@ namespace tracker
 		return s_fpsTarget;
 	}
 
+	SceInt32 PowerCallback(SceUID notifyId, SceInt32 notifyCount, SceInt32 notifyArg, void *pCommon)
+	{
+		if ((notifyArg & SCE_POWER_CALLBACKARG_RESERVED_23) == SCE_POWER_CALLBACKARG_RESERVED_23) {
+			// Set clocks after resume reset
+			PSVSClockFrequency clocks;
+			psvsGetClockFrequency(&clocks);
+			psvsSetArmClockFrequency(clocks.cpu);
+			psvsSetGpuClockFrequency(clocks.gpu);
+			//psvsSetBusClockFrequency(clocks.bus);
+			psvsSetGpuXbarClockFrequency(clocks.xbar);
+
+			// Prevent HUD from blocking peel screen
+			if (!SCE_PAF_IS_DOLCE && Impose::GetHudPosition() == Hud::Position_UpRight && Hud::GetCurrentHud() != SCE_NULL) {
+				Impose::SetHudPosition(Hud::Position_UpLeft);
+			}
+		}
+
+		return SCE_OK;
+	}
+
 	SceVoid Init()
 	{
 		s_currPid = sceKernelGetProcessId();
@@ -115,13 +137,17 @@ namespace tracker
 		if (s_currProfile) {
 			psvsSetArmClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_CPU]);
 			psvsSetGpuClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_GPU_ES4]);
-			psvsSetBusClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_BUS]);
+			//psvsSetBusClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_BUS]);
 			psvsSetGpuXbarClockFrequency(s_currProfile->clock[PSVS_OC_DEVICE_GPU_XBAR]);
 			psvsClockFrequencyLockProc(s_currPid, (PsvsLockDevice)s_currProfile->lock);
 		}
 		else {
 			psvsClockFrequencyUnlockProc(s_currPid, PSVS_LOCK_DEVICE_ALL);
 		}
+
+		SceUID cbid = sceKernelCreateCallback("PSVshellPlus_PCB", 0, PowerCallback, NULL);
+		scePowerRegisterCallback(cbid);
+
 		task::Register(Update, SCE_NULL);
 	}
 
