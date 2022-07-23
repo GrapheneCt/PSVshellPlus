@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1525
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PSVshellPlus_Shell", "PSVshellPlus_Shell\PSVshellPlus_Shell.vcxproj", "{F84FFBB6-2013-43F2-985E-C94E0ADF711D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F54C8C2B-86B4-4DC3-A858-F19136590E83} = {F54C8C2B-86B4-4DC3-A858-F19136590E83}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PSVshellPlus_Kernel", "PSVshellPlus_Kernel\PSVshellPlus_Kernel.vcxproj", "{F54C8C2B-86B4-4DC3-A858-F19136590E83}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|PSVita = Debug|PSVita
+		Release|PSVita = Release|PSVita
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F84FFBB6-2013-43F2-985E-C94E0ADF711D}.Debug|PSVita.ActiveCfg = Debug|PSVita
+		{F84FFBB6-2013-43F2-985E-C94E0ADF711D}.Debug|PSVita.Build.0 = Debug|PSVita
+		{F84FFBB6-2013-43F2-985E-C94E0ADF711D}.Release|PSVita.ActiveCfg = Release|PSVita
+		{F84FFBB6-2013-43F2-985E-C94E0ADF711D}.Release|PSVita.Build.0 = Release|PSVita
+		{F54C8C2B-86B4-4DC3-A858-F19136590E83}.Debug|PSVita.ActiveCfg = Debug|PSVita
+		{F54C8C2B-86B4-4DC3-A858-F19136590E83}.Debug|PSVita.Build.0 = Debug|PSVita
+		{F54C8C2B-86B4-4DC3-A858-F19136590E83}.Release|PSVita.ActiveCfg = Release|PSVita
+		{F54C8C2B-86B4-4DC3-A858-F19136590E83}.Release|PSVita.Build.0 = Release|PSVita
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9EC2EDAB-F25A-47F5-9B8C-B7326D89CADF}
+	EndGlobalSection
+EndGlobal

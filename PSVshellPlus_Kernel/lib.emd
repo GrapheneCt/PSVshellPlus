@@ -1,0 +1,24 @@
+Module: PSVshellPlus_Kernel major_version: 1 minor_version: 0
+module_attr: exclusive_load
+module_attr: exclusive_start
+sceModuleInfo_type: 6
+module_function: module_start localname: __module_start
+module_function: module_stop localname: __module_stop
+Library: PSVshellPlus_KernelForUser attr: auto_export
+Library: PSVshellPlus_KernelForUser attr: syscall_export
+Library: PSVshellPlus_KernelForUser version: 1
+Library: PSVshellPlus_KernelForUser stubfile: "libPSVshellPlus_KernelForUser_stub"
+Library: PSVshellPlus_KernelForUser nidsuffix: ""
+Library: PSVshellPlus_KernelForUser function: psvsSetArmClockFrequency
+Library: PSVshellPlus_KernelForUser function: psvsSetGpuClockFrequency
+Library: PSVshellPlus_KernelForUser function: psvsSetGpuXbarClockFrequency
+Library: PSVshellPlus_KernelForUser function: psvsSetBusClockFrequency
+Library: PSVshellPlus_KernelForUser function: psvsGetClockFrequency
+Library: PSVshellPlus_KernelForUser function: psvsClockFrequencyLockProc
+Library: PSVshellPlus_KernelForUser function: psvsClockFrequencyUnlockProc
+Library: PSVshellPlus_KernelForUser function: psvsClockFrequencyIsLockedProc
+Library: PSVshellPlus_KernelForUser function: psvsSetFpsCounterTarget
+Library: PSVshellPlus_KernelForUser function: psvsGetFps
+Library: PSVshellPlus_KernelForUser function: psvsGetMem
+Library: PSVshellPlus_KernelForUser function: psvsSetRecommendedCasShift
+Library: PSVshellPlus_KernelForUser function: psvsSetClockingPid

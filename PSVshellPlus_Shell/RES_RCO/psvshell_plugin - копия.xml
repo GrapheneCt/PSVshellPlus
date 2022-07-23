@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resource version="0.1" type="normal" id="psvshell_plugin">
+  <pagetable>
+    <page id="psvs_page_hud">
+	</page>
+  </pagetable>
+  
+  <styletable>
+    <style_plane color="0.2, 0.2, 0.2, 1.0" id="psvs_style_plane_hud_bg" />
+	<style_plane color="1, 1, 1, 1" id="psvs_style_plane_icon" planeobj="planeobj1">
+      <planeobj scale_mode_y="1" scale_mode_x="1" id="planeobj1" />
+    </style_plane>
+	<style_text textobj="textobj1" id="psvs_style_text_normal">
+      <textobj font_size="19" max_line_count="1" font_color="1, 1, 1, 1" id="textobj1" />
+    </style_text>
+	<style_text textobj="textobj1" id="psvs_style_text_normal_green">
+      <textobj font_size="19" max_line_count="1" font_color="0, 1, 0, 1" id="textobj1" />
+    </style_text>
+	<style_text textobj="textobj1" id="psvs_style_text_impose">
+      <textobj font_size="24" bold="1" align_y="0" align_x="0" text_align="0" color="1, 1, 1, 1" id="textobj1" />
+    </style_text>
+  </styletable>
+  
+  <templatetable>
+    <template id="psvs_template_hud_bg_mini">
+	  <plane style="_common_style_plane_transparent" id="psvs_plane_hud_bg_mini_base">
+        <layout_hint size="350, 64" pos="10, -10" anchor="1, 2" align="1, 2" />
+		<plane id="psvs_plane_hud_bg_mini_frame" texture="_common_texture_dialog_frame">
+          <layout_hint adjust="1, 1" />
+        </plane>
+        <plane style="_common_style_plane_dialog" id="psvs_plane_hud_bg_mini_fill" texture="_common_texture_dialog_fill_white">
+          <layout_hint adjust="1, 1" />
+        </plane>
+      </plane>
+    </template>
+	<template id="psvs_template_hud_bg_full">
+	  <plane style="_common_style_plane_transparent" id="psvs_plane_hud_bg_mini_base">
+        <layout_hint size="350, 200" pos="10, -10" anchor="1, 2" align="1, 2" />
+		<plane id="psvs_plane_hud_bg_mini_frame" texture="_common_texture_dialog_frame">
+          <layout_hint adjust="1, 1" />
+        </plane>
+        <plane style="_common_style_plane_dialog" id="psvs_plane_hud_bg_mini_fill" texture="_common_texture_dialog_fill_white">
+          <layout_hint adjust="1, 1" />
+        </plane>
+      </plane>
+    </template>
+    <template id="psvs_template_hud_micro">
+	  <text style="psvs_style_text_normal_green" id="psvs_text_fps_micro">
+        <layout_hint pos="-940, -10" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+    </template>
+    <template id="psvs_template_hud_mini">
+	  <text style="psvs_style_text_normal" id="psvs_text_cpu_title" label="psvs_msg_cpu">
+        <layout_hint pos="-290, -8" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cpu_0">
+        <layout_hint pos="-220, -8" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cpu_1">
+        <layout_hint pos="-150, -8" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cpu_2">
+        <layout_hint pos="-80, -8" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cpu_3">
+        <layout_hint pos="-10, -8" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_fps">
+        <layout_hint pos="-268, -34" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cpu_peak">
+        <layout_hint pos="-148, -34" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+    </template>
+	<template id="psvs_template_hud_full">
+	  <text style="psvs_style_text_normal" id="psvs_text_ram_title" label="psvs_msg_ram">
+        <layout_hint pos="10, -60" adjust="2, 2" anchor="1, 2" align="1, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_ram_used">
+        <layout_hint pos="-100, -60" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_ram_total">
+        <layout_hint pos="-10, -60" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cdram_title" label="psvs_msg_cdram">
+        <layout_hint pos="10, -86" adjust="2, 2" anchor="1, 2" align="1, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cdram_used">
+        <layout_hint pos="-100, -86" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cdram_total">
+        <layout_hint pos="-10, -86" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_phy_title" label="psvs_msg_phy">
+        <layout_hint pos="10, -112" adjust="2, 2" anchor="1, 2" align="1, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_phy_used">
+        <layout_hint pos="-100, -112" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_phy_total">
+        <layout_hint pos="-10, -112" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cdlg_title" label="psvs_msg_cdlg">
+        <layout_hint pos="10, -138" adjust="2, 2" anchor="1, 2" align="1, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cdlg_used">
+        <layout_hint pos="-100, -138" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_cdlg_total">
+        <layout_hint pos="-10, -138" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_app_title" label="psvs_msg_app">
+        <layout_hint pos="10, -164" adjust="2, 2" anchor="1, 2" align="1, 2" />
+      </text>
+	  <text style="psvs_style_text_normal" id="psvs_text_app">
+        <layout_hint pos="-10, -164" adjust="2, 2" anchor="2, 2" align="2, 2" />
+      </text>
+    </template> 
+	<template id="psvs_template_impose">
+	  <group id="psvs_group_impose_title">
+        <layout_hint size="728, 70, 0" />
+		<plane style="psvs_style_plane_icon" texture="tex_icon_impose">
+          <layout_hint anchor="1, 4" pos="0, 0" />
+        </plane>
+        <text style="psvs_style_text_impose" id="psvs_text_impose_title" label="psvs_msg_impose">
+          <layout_hint align="1, 0" adjust="2, 2" anchor="1, 4" pos="44, 0" />
+        </text>
+      </group>
+	  <group id="psvs_group_impose_cpu">
+        <layout_hint size="728, 70, 0" />
+        <text style="psvs_style_text_impose" id="psvs_text_impose_cpu_title" label="psvs_msg_cpu">
+          <layout_hint align="1, 0" adjust="2, 2" anchor="1, 4" pos="44, 0" />
+        </text>
+		<button style="_common_default_style_button" id="psvs_button_impose_cpu_down" label="psvs_msg_clockdown" >
+          <layout_hint align="1, 0" size="48, 48" anchor="1, 4" pos="120, 0" />
+        </button>
+		<text style="psvs_style_text_impose" id="psvs_text_impose_cpu_value" >
+          <layout_hint align="1, 0" adjust="2, 2" anchor="1, 4" pos="188, 0" />
+        </text>
+		<button style="_common_default_style_button" id="psvs_button_impose_cpu_up" label="psvs_msg_clockup" >
+          <layout_hint align="1, 0" size="48, 48" anchor="1, 4" pos="320, 0" />
+        </button>
+		<check_box style="_common_default_style_check_box" id="psvs_check_box_impose_cpu_lock">
+          <layout_hint align="1, 0" size="46, 46" anchor="1, 4" pos="400, 0" />
+          <focus_hint focus_shape="0" focus_size="47, 47" />
+        </check_box>
+		<text style="psvs_style_text_impose" id="psvs_text_impose_cpu_lock" label="psvs_msg_clocklock" >
+          <layout_hint align="1, 0" adjust="2, 2" anchor="1, 4" pos="466, 0" />
+        </text>
+      </group>
+    </template>  
+	  
+  </templatetable>
+  
+  <stringtable>
+	<locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="ja" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="en" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="en-gb" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="fr" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="es" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="de" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="it" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="nl" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="pt" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="pt-br" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="ru" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="ko" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="zh-t" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="zh-s" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="fi" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="sv" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="da" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="no" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="pl" />
+    <locale origsize="960" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="tr" />
+  </stringtable>
+  
+  <texturetable>
+    <texture src="texture\tex_icon_impose.png" type="texture/png" id="tex_icon_impose" />
+  </texturetable>
+  
+  <filetable>
+  </filetable>
+  
+</resource>
