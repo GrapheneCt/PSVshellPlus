@@ -200,7 +200,7 @@
       </group>
 	  <group id="psvs_group_impose_profile">
         <layout_hint size="728, 70, 0" />
-		<button style="_common_default_style_button" id="psvs_button_impose_save" label="msg_save_new" >
+		<button style="_common_default_style_button" id="psvs_button_impose_save" label="msg_ok" >
           <layout_hint align="1, 0" size="200, 48" anchor="1, 4" pos="44, 0" />
         </button>
 		<button style="_common_default_style_button" id="psvs_button_impose_delete" enable="0" label="msg_delete" >
@@ -259,7 +259,7 @@
   </templatetable>
   
   <stringtable>
-	<locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="ja" />
+	<locale origsize="2016" src="RES_RCO_TMP\psvshell_locale_ja.xml.rcs.zlib" compress="on" id="ja" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="en" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="en-gb" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="fr" />
@@ -269,10 +269,10 @@
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="nl" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="pt" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="pt-br" />
-    <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="ru" />
+    <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_ru.xml.rcs.zlib" compress="on" id="ru" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="ko" />
-    <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="zh-t" />
-    <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="zh-s" />
+    <locale origsize="2000" src="RES_RCO_TMP\psvshell_locale_zh-t.xml.rcs.zlib" compress="on" id="zh-t" />
+    <locale origsize="2000" src="RES_RCO_TMP\psvshell_locale_zh-s.xml.rcs.zlib" compress="on" id="zh-s" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="fi" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="sv" />
     <locale origsize="2032" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="da" />
