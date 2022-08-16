@@ -12,7 +12,7 @@
   <string src="HUD:" id="psvs_msg_hud" />
   <string src="CAS:" id="psvs_msg_cas" />
   <string src="Auto" id="psvs_msg_auto" />
-  <string src="Off" id="psvs_msg_hud_off" />
+  <string src="No" id="psvs_msg_hud_off" />
   <string src="FPS" id="psvs_msg_hud_micro" />
   <string src="Mini" id="psvs_msg_hud_mini" />
   <string src="Full" id="psvs_msg_hud_full" />
@@ -21,7 +21,7 @@
   <string src="U-R" id="psvs_msg_hud_pos_ur" />
   <string src="D-L" id="psvs_msg_hud_pos_dl" />
   <string src="D-R" id="psvs_msg_hud_pos_dr" />
-  <string src="System Control" id="psvs_msg_impose" />
+  <string src="Sistema de Control" id="psvs_msg_impose" />
   <string src="-" id="psvs_msg_clockdown" />
   <string src="+" id="psvs_msg_clockup" />
 </stringset>
