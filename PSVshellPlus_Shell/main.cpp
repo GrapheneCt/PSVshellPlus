@@ -9,6 +9,7 @@
 #include "tracker.h"
 #include "impose.h"
 #include "profile.h"
+#include "runtime_ext.h"
 
 using namespace paf;
 
@@ -124,6 +125,8 @@ extern "C" {
 
 	SceInt32 sceAVConfigRegisterCallback_patched(SceUID cbid, SceInt32 a2)
 	{
+		pafInitRuntimeExt();
+
 		coreInitPlugin();
 		coreInitImpose();
 

@@ -16,6 +16,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="profile.cpp" />
     <ClCompile Include="psvs.c" />
+    <ClCompile Include="runtime_ext.c" />
     <ClCompile Include="tracker.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
@@ -25,6 +26,7 @@
     <ClInclude Include="impose.h" />
     <ClInclude Include="profile.h" />
     <ClInclude Include="psvs.h" />
+    <ClInclude Include="runtime_ext.h" />
     <ClInclude Include="tracker.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
