@@ -294,7 +294,7 @@
 	<locale origsize="2112" src="RES_RCO_TMP\psvshell_locale_ja.xml.rcs.zlib" compress="on" id="ja" />
     <locale origsize="2128" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="en" />
     <locale origsize="2128" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="en-gb" />
-    <locale origsize="2128" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="fr" />
+    <locale origsize="2112" src="RES_RCO_TMP\psvshell_locale_fr.xml.rcs.zlib" compress="on" id="fr" />
     <locale origsize="2128" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="es" />
     <locale origsize="2128" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="de" />
     <locale origsize="2128" src="RES_RCO_TMP\psvshell_locale_en.xml.rcs.zlib" compress="on" id="it" />
