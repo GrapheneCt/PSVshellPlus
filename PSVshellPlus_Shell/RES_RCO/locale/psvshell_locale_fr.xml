@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<stringset>
+  <string src="CPU:" id="psvs_msg_cpu" />
+  <string src="GPU:" id="psvs_msg_gpu" />
+  <string src="BUS:" id="psvs_msg_bus" />
+  <string src="XBAR:" id="psvs_msg_xbar" />
+  <string src="RAM:" id="psvs_msg_ram" />
+  <string src="CDRAM:" id="psvs_msg_cdram" />
+  <string src="PHY:" id="psvs_msg_phy" />
+  <string src="CDLG:" id="psvs_msg_cdlg" />
+  <string src="FG APP:" id="psvs_msg_app" />
+  <string src="HUD:" id="psvs_msg_hud" />
+  <string src="CAS:" id="psvs_msg_cas" />
+  <string src="Auto" id="psvs_msg_auto" />
+  <string src="Non" id="psvs_msg_hud_off" />
+  <string src="FPS" id="psvs_msg_hud_micro" />
+  <string src="Mini" id="psvs_msg_hud_mini" />
+  <string src="Tout" id="psvs_msg_hud_full" />
+  <string src="POS:" id="psvs_msg_hud_pos" />
+  <string src="H-G" id="psvs_msg_hud_pos_ul" />
+  <string src="H-D" id="psvs_msg_hud_pos_ur" />
+  <string src="B-G" id="psvs_msg_hud_pos_dl" />
+  <string src="B-D" id="psvs_msg_hud_pos_dr" />
+  <string src="CTRL Système" id="psvs_msg_impose" />
+  <string src="-" id="psvs_msg_clockdown" />
+  <string src="+" id="psvs_msg_clockup" />
+</stringset>
