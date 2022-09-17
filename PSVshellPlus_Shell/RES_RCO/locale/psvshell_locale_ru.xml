@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <stringset>
   <string src="CPU:" id="psvs_msg_cpu" />
+  <string src="VNZ:" id="psvs_msg_vnz" />
   <string src="GPU:" id="psvs_msg_gpu" />
   <string src="BUS:" id="psvs_msg_bus" />
   <string src="XBAR:" id="psvs_msg_xbar" />

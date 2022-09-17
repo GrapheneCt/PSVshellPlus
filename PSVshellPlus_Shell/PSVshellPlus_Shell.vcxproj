@@ -16,7 +16,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="profile.cpp" />
     <ClCompile Include="psvs.c" />
-    <ClCompile Include="runtime_ext.c" />
     <ClCompile Include="tracker.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
@@ -26,7 +25,6 @@
     <ClInclude Include="impose.h" />
     <ClInclude Include="profile.h" />
     <ClInclude Include="psvs.h" />
-    <ClInclude Include="runtime_ext.h" />
     <ClInclude Include="tracker.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
@@ -71,7 +69,7 @@
     </ClCompile>
     <Link>
       <AdditionalOptions>--no-standard-libraries --no-required-files</AdditionalOptions>
-      <AdditionalDependencies>-lSceDbg_stub;-lScePafTopLevel_stub_weak;-lScePafStdc_stub_weak;-lScePafCommon_stub_weak;-lScePafWidget_stub_weak;-lScePafThread_stub_weak;-lScePafResource_stub_weak;-lScePafGraphics_stub_weak;-lScePafMisc_stub_weak;-lSceLibKernel_stub;-lSceThreadMgr_stub;-lSceThreadmgrCoredumpTime_stub;-lSceAppMgrUser_stub;-lSceAppMgr_stub;-lSceSysmodule_stub;-lSceVshBridge_stub;-lSceDisplay_stub;-lScePower_stub;-ltaihen_stub;$(SolutionDir)PSVshellPlus_Kernel\libPSVshellPlus_KernelForUser_stub.a;-lsnc;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>-lSceDbg_stub;-lScePafTopLevel_stub_weak;-lScePafStdc_stub_weak;-lScePafCommon_stub_weak;-lScePafWidget_stub_weak;-lScePafThread_stub_weak;-lScePafResource_stub_weak;-lScePafGraphics_stub_weak;-lScePafMisc_stub_weak;-lSceLibKernel_stub;-lSceThreadMgr_stub;-lSceThreadmgrCoredumpTime_stub;-lSceAppMgrUser_stub;-lSceAppMgr_stub;-lSceSysmodule_stub;-lSceVshBridge_stub;-lSceDisplay_stub;-lScePower_stub;-lSceCodecEngineWrapper_stub;-ltaihen_stub;$(SolutionDir)PSVshellPlus_Kernel\libPSVshellPlus_KernelForUser_stub.a;-lsnc;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SCE_PSP2_SDK_DIR)\target\lib\vdsuite;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <InfoStripping>StripSymsAndDebug</InfoStripping>
       <DataStripping>StripFuncsAndData</DataStripping>
@@ -91,7 +89,7 @@
     </ClCompile>
     <Link>
       <AdditionalOptions>--no-standard-libraries --no-required-files</AdditionalOptions>
-      <AdditionalDependencies>-lScePafTopLevel_stub_weak;-lScePafStdc_stub_weak;-lScePafCommon_stub_weak;-lScePafWidget_stub_weak;-lScePafThread_stub_weak;-lScePafResource_stub_weak;-lScePafGraphics_stub_weak;-lScePafMisc_stub_weak;-lSceLibKernel_stub;-lSceThreadMgr_stub;-lSceThreadmgrCoredumpTime_stub;-lSceAppMgrUser_stub;-lSceAppMgr_stub;-lSceSysmodule_stub;-lSceVshBridge_stub;-lSceDisplay_stub;-lScePower_stub;-ltaihen_stub;$(SolutionDir)PSVshellPlus_Kernel\libPSVshellPlus_KernelForUser_stub.a;-lsnc;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>-lScePafTopLevel_stub_weak;-lScePafStdc_stub_weak;-lScePafCommon_stub_weak;-lScePafWidget_stub_weak;-lScePafThread_stub_weak;-lScePafResource_stub_weak;-lScePafGraphics_stub_weak;-lScePafMisc_stub_weak;-lSceLibKernel_stub;-lSceThreadMgr_stub;-lSceThreadmgrCoredumpTime_stub;-lSceAppMgrUser_stub;-lSceAppMgr_stub;-lSceSysmodule_stub;-lSceVshBridge_stub;-lSceDisplay_stub;-lScePower_stub;-lSceCodecEngineWrapper_stub;-ltaihen_stub;$(SolutionDir)PSVshellPlus_Kernel\libPSVshellPlus_KernelForUser_stub.a;-lsnc;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(SCE_PSP2_SDK_DIR)\target\lib\vdsuite;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <InfoStripping>StripSymsAndDebug</InfoStripping>
       <DataStripping>StripFuncsAndData</DataStripping>

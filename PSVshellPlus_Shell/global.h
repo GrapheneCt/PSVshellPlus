@@ -6,4 +6,4 @@
 
 extern paf::Plugin *g_corePlugin;
 extern paf::ui::ScrollView *g_imposeRoot;
-extern paf::ui::Page *g_coreRoot;
+extern paf::ui::Scene *g_coreRoot;

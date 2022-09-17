@@ -236,7 +236,47 @@ namespace psvs
 		this->oldMem.cdramTotal = __INT_MAX__;
 		this->oldMem.phycontTotal = __INT_MAX__;
 		this->oldMem.cdialogTotal = __INT_MAX__;
+		this->oldVnz.core0 = __INT_MAX__;
+		this->oldVnz.core1 = __INT_MAX__;
+		this->oldVnz.core2 = __INT_MAX__;
+		this->oldVnz.core3 = __INT_MAX__;
+		this->oldVnz.core4 = __INT_MAX__;
+		this->oldVnz.core5 = __INT_MAX__;
+		this->oldVnz.core6 = __INT_MAX__;
+		this->oldVnz.core7 = __INT_MAX__;
+		this->oldVnz.average = __INT_MAX__;
+		this->oldVnz.peak = __INT_MAX__;
 		this->memTick = 0;
+
+		element.hash = psvs_template_hud_vnz;
+		g_corePlugin->TemplateOpen(this->root, &element, &tmpParam);
+
+		element.hash = psvs_text_vnz_0;
+		this->vnz[0] = (ui::Text *)this->root->GetChild(&element, 0);
+
+		element.hash = psvs_text_vnz_1;
+		this->vnz[1] = (ui::Text *)this->root->GetChild(&element, 0);
+
+		element.hash = psvs_text_vnz_2;
+		this->vnz[2] = (ui::Text *)this->root->GetChild(&element, 0);
+
+		element.hash = psvs_text_vnz_3;
+		this->vnz[3] = (ui::Text *)this->root->GetChild(&element, 0);
+
+		element.hash = psvs_text_vnz_4;
+		this->vnz[4] = (ui::Text *)this->root->GetChild(&element, 0);
+
+		element.hash = psvs_text_vnz_5;
+		this->vnz[5] = (ui::Text *)this->root->GetChild(&element, 0);
+
+		element.hash = psvs_text_vnz_6;
+		this->vnz[6] = (ui::Text *)this->root->GetChild(&element, 0);
+
+		element.hash = psvs_text_vnz_7;
+		this->vnz[7] = (ui::Text *)this->root->GetChild(&element, 0);
+
+		element.hash = psvs_text_vnz_peak;
+		this->vnzPeak = (ui::Text *)this->root->GetChild(&element, 0);
 
 		element.hash = psvs_template_hud_full;
 		g_corePlugin->TemplateOpen(this->root, &element, &tmpParam);
@@ -295,11 +335,11 @@ namespace psvs
 			break;
 		case Position_DownLeft:
 			vec.x = 10.0f;
-			vec.y = -334.0f;
+			vec.y = -288.0f;
 			break;
 		case Position_DownRight:
 			vec.x = 600.0f;
-			vec.y = -334.0f;
+			vec.y = -288.0f;
 			break;
 		}
 
@@ -311,12 +351,72 @@ namespace psvs
 		wstring wtext;
 		wchar_t wbuf[8];
 		PSVSMem mem;
+		PSVSVenezia vnz;
 		SceUInt32 tickNow = sceKernelGetProcessTimeLow();
 		SceUInt32 used = 0;
 		SceUInt32 total = 0;
+		SceBool vnzUpdateFrame = SCE_FALSE;
 		HudFull *obj = (HudFull *)arg;
 
+		if (tickNow - obj->memTick > PSVS_VNZ_UPDATE_WINDOW_USEC) {
+			//Update Venezia
+			sceCodecEnginePmonStop();
+			psvsGetVeneziaInfo(&vnz);
+			sceCodecEnginePmonReset();
+			sceCodecEnginePmonStart();
+			vnzUpdateFrame = SCE_TRUE;
+		}
+
 		if (tickNow - obj->memTick > PSVS_FULL_UPDATE_WINDOW_USEC) {
+
+			if (vnzUpdateFrame) {
+				if (obj->oldVnz.core0 != vnz.core0) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.core0);
+					wtext = wbuf;
+					obj->vnz[0]->SetLabel(&wtext);
+				}
+				if (obj->oldVnz.core1 != vnz.core1) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.core1);
+					wtext = wbuf;
+					obj->vnz[1]->SetLabel(&wtext);
+				}
+				if (obj->oldVnz.core2 != vnz.core2) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.core2);
+					wtext = wbuf;
+					obj->vnz[2]->SetLabel(&wtext);
+				}
+				if (obj->oldVnz.core3 != vnz.core3) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.core3);
+					wtext = wbuf;
+					obj->vnz[3]->SetLabel(&wtext);
+				}
+				if (obj->oldVnz.core4 != vnz.core4) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.core4);
+					wtext = wbuf;
+					obj->vnz[4]->SetLabel(&wtext);
+				}
+				if (obj->oldVnz.core5 != vnz.core5) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.core5);
+					wtext = wbuf;
+					obj->vnz[5]->SetLabel(&wtext);
+				}
+				if (obj->oldVnz.core6 != vnz.core6) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.core6);
+					wtext = wbuf;
+					obj->vnz[6]->SetLabel(&wtext);
+				}
+				if (obj->oldVnz.core7 != vnz.core7) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.core7);
+					wtext = wbuf;
+					obj->vnz[7]->SetLabel(&wtext);
+				}
+				if (obj->oldVnz.peak != vnz.peak) {
+					sce_paf_swprintf(wbuf, sizeof(wbuf), L" %d%%", vnz.peak);
+					wtext = wbuf;
+					obj->vnzPeak->SetLabel(&wtext);
+				}
+			}
+
 			//Update memory
 			psvsGetMem(s_casShift, &mem);
 
@@ -334,6 +434,7 @@ namespace psvs
 
 			obj->memTick = tickNow;
 			obj->oldMem = mem;
+			obj->oldVnz = vnz;
 		}
 	}
 

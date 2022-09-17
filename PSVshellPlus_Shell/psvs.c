@@ -72,4 +72,6 @@ SceInt32 psvsGetCpu(PSVSCpu *cpu)
 
 	for (int i = 0; i < SCE_KERNEL_MAX_CPU; i++)
 		cpu->avg[i] = g_perfUsage[i];
+
+	return 0;
 }

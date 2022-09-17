@@ -14,6 +14,7 @@ Library: PSVshellPlus_KernelForUser function: psvsSetGpuClockFrequency
 Library: PSVshellPlus_KernelForUser function: psvsSetGpuXbarClockFrequency
 Library: PSVshellPlus_KernelForUser function: psvsSetBusClockFrequency
 Library: PSVshellPlus_KernelForUser function: psvsGetClockFrequency
+Library: PSVshellPlus_KernelForUser function: psvsGetVeneziaInfo
 Library: PSVshellPlus_KernelForUser function: psvsClockFrequencyLockProc
 Library: PSVshellPlus_KernelForUser function: psvsClockFrequencyUnlockProc
 Library: PSVshellPlus_KernelForUser function: psvsClockFrequencyIsLockedProc

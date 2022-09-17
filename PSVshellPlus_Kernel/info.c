@@ -1,5 +1,6 @@
 #include <kernel.h>
 #include <string.h>
+#include <taihen.h>
 #include <sce_atomic.h>
 
 #include "info.h"
@@ -16,6 +17,8 @@ static SceUInt32 g_perfFrametimeSum = 0;
 static SceUInt8 g_perfFrametimeN = 0;
 static SceInt32 s_perfFps = 0;
 static SceInt32 s_casShift = 0;
+
+int(*_sceVeneziaGetProcessorLoad)(PSVSVenezia *data) = NULL;
 
 SceInt32 psvsGetFps()
 {
@@ -157,4 +160,28 @@ SceVoid psvsCalcFps()
 	g_perfFrametimeN++;
 	g_perfFrametimeSum += frametime;
 	s_perfTickFpsLast = tickNow;
+}
+
+SceInt32 psvsGetVeneziaInfo(PSVSVenezia *data)
+{
+	PSVSVenezia kdata;
+	SceInt32 ret = SCE_KERNEL_ERROR_UNSUP;
+
+	if (!data)
+		return SCE_KERNEL_ERROR_INVALID_ARGUMENT;
+
+	if (!_sceVeneziaGetProcessorLoad) {
+		tai_module_info_t info;
+		memset(&info, 0, sizeof(tai_module_info_t));
+		info.size = sizeof(tai_module_info_t);
+		taiGetModuleInfoForKernel(KERNEL_PID, "SceCodecEngineWrapper", &info);
+		module_get_offset(KERNEL_PID, info.modid, 0, 0x36EC | 1, (uintptr_t *)&_sceVeneziaGetProcessorLoad);
+	}
+
+	if (_sceVeneziaGetProcessorLoad)
+		ret = _sceVeneziaGetProcessorLoad(&kdata);
+
+	sceKernelCopyToUser(data, &kdata, sizeof(PSVSVenezia));
+
+	return ret;
 }

@@ -37,7 +37,7 @@ namespace psvs
 		PSVSClockFrequency clock;
 		psvsGetClockFrequency(&clock);
 			 
-		switch (self->hash) {
+		switch (self->elem.hash) {
 		case psvs_button_impose_cpu_down:
 			currentClock = clock.cpu;
 			clockSet = psvsSetArmClockFrequency;
@@ -279,7 +279,7 @@ namespace psvs
 	{
 		ui::Widget *bt = (ui::Widget *)pUserData;
 
-		if (self->hash == psvs_button_impose_save) {
+		if (self->elem.hash == psvs_button_impose_save) {
 			psvs::Profile *profile = new psvs::Profile();
 			profile->Save();
 			delete profile;
@@ -287,7 +287,7 @@ namespace psvs
 			tracker::ReloadCurrentProfile();
 			bt->Enable(true);
 		}
-		else if (self->hash == psvs_button_impose_delete) {
+		else if (self->elem.hash == psvs_button_impose_delete) {
 			psvs::Profile::Delete();
 			tracker::ReloadCurrentProfile();
 			bt->Disable(true);
@@ -300,7 +300,7 @@ namespace psvs
 		ScePID pid = psvs::tracker::GetCurrentPID();
 		PsvsLockDevice target = PSVS_LOCK_DEVICE_NONE;
 
-		switch (self->hash) {
+		switch (self->elem.hash) {
 		case psvs_check_box_impose_cpu_lock:
 			target = PSVS_LOCK_DEVICE_CPU;
 			break;

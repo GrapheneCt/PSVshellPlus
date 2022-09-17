@@ -9,16 +9,14 @@
 #include "tracker.h"
 #include "impose.h"
 #include "profile.h"
-#include "runtime_ext.h"
 
 using namespace paf;
 
 Plugin *g_corePlugin = SCE_NULL;
 ui::ScrollView *g_imposeRoot = SCE_NULL;
-ui::Page *g_coreRoot = SCE_NULL;
+ui::Scene *g_coreRoot = SCE_NULL;
 
 static SceBool s_imposeOpened = SCE_FALSE;
-static psvs::Impose *s_imposeInstance = SCE_NULL;
 
 extern "C"
 {
@@ -125,8 +123,6 @@ extern "C" {
 
 	SceInt32 sceAVConfigRegisterCallback_patched(SceUID cbid, SceInt32 a2)
 	{
-		pafInitRuntimeExt();
-
 		coreInitPlugin();
 		coreInitImpose();
 

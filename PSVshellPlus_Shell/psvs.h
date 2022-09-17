@@ -55,6 +55,19 @@ typedef struct PSVSMem {
 	SceUInt32 cdialogTotal;
 } PSVSMem;
 
+typedef struct PSVSVenezia {
+	SceInt32 core0;
+	SceInt32 core1;
+	SceInt32 core2;
+	SceInt32 core3;
+	SceInt32 core4;
+	SceInt32 core5;
+	SceInt32 core6;
+	SceInt32 core7;
+	SceInt32 average;
+	SceInt32 peak;
+} PSVSVenezia;
+
 typedef struct PSVSCpu {
 	SceInt32 avg[SCE_KERNEL_MAX_CPU];
 	SceInt32 peak;
@@ -73,9 +86,17 @@ SceInt32 psvsClockFrequencyUnlockProc(ScePID pid, PsvsLockDevice type);
 SceBool psvsClockFrequencyIsLockedProc(ScePID pid, PsvsLockDevice type);
 SceInt32 psvsSetRecommendedCasShift(char *name, SceInt32 namelen);
 SceVoid psvsSetClockingPid(SceUID pid);
+SceInt32 psvsGetVeneziaInfo(PSVSVenezia *data);
 
 SceVoid psvsCalcCpu();
 SceInt32 psvsGetCpu(PSVSCpu *cpu);
+
+int _sceCodecEnginePmonStop();
+int _sceCodecEnginePmonReset();
+int _sceCodecEnginePmonStart();
+#define sceCodecEnginePmonStop _sceCodecEnginePmonStop
+#define sceCodecEnginePmonReset _sceCodecEnginePmonReset
+#define sceCodecEnginePmonStart _sceCodecEnginePmonStart
 
 #ifdef __cplusplus
 }

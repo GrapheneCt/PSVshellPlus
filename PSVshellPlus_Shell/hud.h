@@ -106,9 +106,20 @@ namespace psvs
 	public:
 
 		#define PSVS_FULL_UPDATE_WINDOW_USEC	(100000)
+		#define PSVS_VNZ_UPDATE_WINDOW_USEC		(1000)
 
 		enum Hash
 		{
+			psvs_template_hud_vnz = 0x77a08140,
+			psvs_text_vnz_0 = 0x7524c263,
+			psvs_text_vnz_1 = 0x56c14879,
+			psvs_text_vnz_2 = 0x03cd5e60,
+			psvs_text_vnz_3 = 0x8c6b209e,
+			psvs_text_vnz_4 = 0x98e73415,
+			psvs_text_vnz_5 = 0xd8c59975,
+			psvs_text_vnz_6 = 0x7cb8ea8d,
+			psvs_text_vnz_7 = 0xf646c3a1,
+			psvs_text_vnz_peak = 0xebc15716,
 			psvs_template_hud_full = 0x367de75c,
 			psvs_text_ram_used = 0xe161c101,
 			psvs_text_ram_total = 0x588ba69b,
@@ -132,6 +143,8 @@ namespace psvs
 
 	protected:
 
+		paf::ui::Text *vnz[8];
+		paf::ui::Text *vnzPeak;
 		paf::ui::Text *ramUsed;
 		paf::ui::Text *cdramUsed;
 		paf::ui::Text *phyUsed;
@@ -144,6 +157,7 @@ namespace psvs
 
 		SceUInt32 memTick;
 		PSVSMem oldMem;
+		PSVSVenezia oldVnz;
 	};
 
 }

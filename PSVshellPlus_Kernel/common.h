@@ -90,6 +90,19 @@ typedef struct PSVSMem {
 	SceUInt32 cdialogTotal;
 } PSVSMem;
 
+typedef struct PSVSVenezia {
+	SceInt32 core0;
+	SceInt32 core1;
+	SceInt32 core2;
+	SceInt32 core3;
+	SceInt32 core4;
+	SceInt32 core5;
+	SceInt32 core6;
+	SceInt32 core7;
+	SceInt32 average;
+	SceInt32 peak;
+} PSVSVenezia;
+
 typedef struct PSVSKPLS {
 	SceUInt32 lock;
 } PSVSKPLS;
