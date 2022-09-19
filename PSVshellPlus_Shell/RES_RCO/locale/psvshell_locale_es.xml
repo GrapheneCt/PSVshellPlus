@@ -16,7 +16,7 @@
   <string src="No" id="psvs_msg_hud_off" />
   <string src="FPS" id="psvs_msg_hud_micro" />
   <string src="Mini" id="psvs_msg_hud_mini" />
-  <string src="Full" id="psvs_msg_hud_full" />
+  <string src="Todo" id="psvs_msg_hud_full" />
   <string src="HPOS:" id="psvs_msg_hud_pos" />
   <string src="Ar-I" id="psvs_msg_hud_pos_ul" />
   <string src="Ar-D" id="psvs_msg_hud_pos_ur" />
