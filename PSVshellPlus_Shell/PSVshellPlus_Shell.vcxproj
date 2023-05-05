@@ -76,7 +76,7 @@
       <DuplicateStripping>true</DuplicateStripping>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/vdsuite-pubprx.exe" --compress "$(LocalDebuggerCommand)" "$(OutDir)_$(TargetName).suprx"</Command>
+      <Command>"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/vdsuite-pubprx.exe" --compress "$(LocalDebuggerCommand)" "$(LocalDebuggerCommand)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|PSVita'">
@@ -86,6 +86,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <AdditionalIncludeDirectories>$(SCE_PSP2_SDK_DIR)\target\include\vdsuite\user;$(SCE_PSP2_SDK_DIR)\target\include\vdsuite\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <CppLanguageStd>Cpp11</CppLanguageStd>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <AdditionalOptions>--no-standard-libraries --no-required-files</AdditionalOptions>
@@ -96,7 +97,7 @@
       <DuplicateStripping>true</DuplicateStripping>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/vdsuite-pubprx.exe" --compress "$(LocalDebuggerCommand)" "$(OutDir)_$(TargetName).suprx"</Command>
+      <Command>"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/vdsuite-pubprx.exe" --compress "$(LocalDebuggerCommand)" "$(LocalDebuggerCommand)"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <Import Condition="'$(ConfigurationType)' == 'Makefile' and Exists('$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets')" Project="$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets" />

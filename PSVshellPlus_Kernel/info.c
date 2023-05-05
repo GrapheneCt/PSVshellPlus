@@ -185,3 +185,16 @@ SceInt32 psvsGetVeneziaInfo(PSVSVenezia *data)
 
 	return ret;
 }
+
+SceInt32 psvsGetBatteryInfo(PSVSBattery *data)
+{
+	PSVSBattery kdata;
+	SceInt32 ret = SCE_KERNEL_ERROR_UNSUP;
+
+	kdata.current = 0;
+	ret = sceSysconGetBatteryCurrent(&kdata.current);
+	kdata.current = -kdata.current;
+
+	sceKernelCopyToUser(data, &kdata, sizeof(PSVSBattery));
+	return ret;
+}

@@ -103,6 +103,10 @@ typedef struct PSVSVenezia {
 	SceInt32 peak;
 } PSVSVenezia;
 
+typedef struct PSVSBattery {
+	SceInt32 current;
+} PSVSBattery;
+
 typedef struct PSVSKPLS {
 	SceUInt32 lock;
 } PSVSKPLS;

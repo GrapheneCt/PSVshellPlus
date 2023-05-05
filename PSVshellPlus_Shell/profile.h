@@ -14,11 +14,11 @@ namespace psvs
 	{
 	public:
 
-		static SceVoid Init();
+		static void Init();
 
 		static Profile *Load();
 
-		static SceVoid Delete();
+		static void Delete();
 
 		Profile();
 
@@ -26,11 +26,11 @@ namespace psvs
 
 		~Profile();
 
-		SceVoid Save();
+		void Save();
 
 		char ver[8];
-		SceUInt32 lock;
-		SceInt32 clock[PSVS_OC_DEVICE_MAX];
+		uint32_t lock;
+		int32_t clock[PSVS_OC_DEVICE_MAX];
 
 	private:
 	};

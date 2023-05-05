@@ -12,18 +12,17 @@
 
 using namespace paf;
 
-Plugin *g_corePlugin = SCE_NULL;
-ui::ScrollView *g_imposeRoot = SCE_NULL;
-ui::Scene *g_coreRoot = SCE_NULL;
+Plugin *g_corePlugin = NULL;
+ui::ScrollView *g_imposeRoot = NULL;
 
-static SceBool s_imposeOpened = SCE_FALSE;
+static bool s_imposeOpened = false;
 
 extern "C"
 {
 	SceUID _vshKernelSearchModuleByName(const char *, int *);
 }
 
-SceVoid corePluginStartCb(Plugin *plugin)
+void corePluginStartCb(Plugin *plugin)
 {
 	if (!plugin) {
 		SCE_DBG_LOG_ERROR("g_corePlugin is NULL\n");
@@ -32,30 +31,28 @@ SceVoid corePluginStartCb(Plugin *plugin)
 	g_corePlugin = plugin;
 }
 
-SceVoid coreSetImposeTask(ScePVoid arg)
+void coreSetImposeTask(void *arg)
 {
-	rco::Element element;
-	element.hash = 0x0EE0C8AF;
-	ui::Box *box = (ui::Box *)g_imposeRoot->GetChild(&element, 0);
+	ui::Box *box = (ui::Box *)g_imposeRoot->FindChild(0x0EE0C8AF, 0);
 	if (!box)
 		return;
 
 	new psvs::Impose(g_corePlugin, box);
 
-	s_imposeOpened = SCE_FALSE;
+	s_imposeOpened = false;
 
-	task::Unregister(coreSetImposeTask, SCE_NULL);
+	common::MainThreadCallList::Unregister(coreSetImposeTask, NULL);
 }
 
-SceVoid coreSetImpose(SceBool enable)
+void coreSetImpose(bool enable)
 {
 	if (enable && !s_imposeOpened) {
-		task::Register(coreSetImposeTask, SCE_NULL);
-		s_imposeOpened = SCE_TRUE;
+		common::MainThreadCallList::Register(coreSetImposeTask, NULL);
+		s_imposeOpened = true;
 	}
 }
 
-SceVoid coreInitImpose()
+void coreInitImpose()
 {
 	SCE_DBG_LOG_INFO("coreInitImpose\n");
 
@@ -65,7 +62,7 @@ SceVoid coreInitImpose()
 		return;
 
 	//Power manage plugin -> power manage interface
-	ScePVoid powerIf = powerManagePlugin->GetInterface(1);
+	void *powerIf = powerManagePlugin->GetInterface(1);
 	if (!powerIf)
 		return;
 
@@ -83,29 +80,23 @@ SceVoid coreInitImpose()
 	SCE_DBG_LOG_INFO("coreInitImpose OK\n");
 }
 
-SceVoid coreInitPlugin()
+void coreInitPlugin()
 {
 	SCE_DBG_LOG_INFO("coreInitPlugin\n");
 
-	rco::Element element;
-	Plugin::PageInitParam pgiParam;
 	Plugin::InitParam pluginParam;
 
-	pluginParam.pluginName = "psvshell_plugin";
-	pluginParam.resourcePath = "ur0:data/PSVshell/psvshell_plugin.rco";
-	pluginParam.scopeName = "__main__";
-	pluginParam.pluginStartCB = corePluginStartCb;
+	pluginParam.name = "psvshell_plugin";
+	pluginParam.resource_file = "ur0:data/PSVshell/psvshell_plugin.rco";
+	pluginParam.caller_name = "__main__";
+	pluginParam.start_func = corePluginStartCb;
 
-	s_frameworkInstance->LoadPlugin(&pluginParam, SCE_NULL, SCE_NULL);
+	Plugin::LoadSync(pluginParam);
 
 	psvs::Profile::Init();
 
-	//task::Register(leakTestTask, SCE_NULL);
+	//task::Register(leakTestTask, NULL);
 	psvs::tracker::Init();
-
-	pgiParam.priority = 6;
-	element.hash = psvs::GetHash("psvs_page_hud");
-	g_coreRoot = g_corePlugin->PageOpen(&element, &pgiParam);
 
 	SCE_DBG_LOG_INFO("coreInitPlugin OK\n");
 }
@@ -117,7 +108,7 @@ extern "C" {
 
 	bool paf_system_SupportsWiredEthernet_patched()
 	{
-		coreSetImpose(SCE_TRUE);
+		coreSetImpose(true);
 		return TAI_NEXT(paf_system_SupportsWiredEthernet_patched, s_hookRef[1]);
 	}
 

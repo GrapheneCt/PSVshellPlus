@@ -18,19 +18,19 @@ namespace psvs
 {
 namespace tracker
 {
-	static SceInt32 s_currAppId = -1;
+	static int32_t s_currAppId = -1;
 	static ScePID s_currPid = -1;
-	static wstring *s_currAppName = SCE_NULL;
-	static SceUInt32 s_tickOld = 0;
-	static SceInt32 s_fpsTarget = PSVS_FPS_COUNTER_TARGET_SHFB;
-	static psvs::Profile *s_currProfile = SCE_NULL;
+	static wstring *s_currAppName = NULL;
+	static uint32_t s_tickOld = 0;
+	static int32_t s_fpsTarget = PSVS_FPS_COUNTER_TARGET_SHFB;
+	static psvs::Profile *s_currProfile = NULL;
 
-	SceVoid Update(ScePVoid arg)
+	void Update(void *arg)
 	{
 		char name[32];
-		SceInt32 appId = -1;
-		SceUInt32 tickNow = sceKernelGetProcessTimeLow();
-		SceBool appChanged = SCE_FALSE;
+		int32_t appId = -1;
+		uint32_t tickNow = sceKernelGetProcessTimeLow();
+		bool appChanged = false;
 
 		if (tickNow - s_tickOld > PSVS_APP_UPDATE_WINDOW_USEC) {
 			appId = sceAppMgrGetAppIdByAppId(SCE_APPMGR_APP_ID_ACTIVE);
@@ -38,7 +38,7 @@ namespace tracker
 				if (s_currAppId != appId) {
 					s_currPid = sceAppMgrGetProcessIdByAppIdForShell(appId);
 					sceAppMgrGetNameById(sceAppMgrGetProcessIdByAppIdForShell(appId), name);
-					ccc::UTF8toUTF16(name, s_currAppName);
+					common::Utf8ToUtf16(name, s_currAppName);
 					if (sceAppMgrGetAppIdByAppId(SCE_APPMGR_APP_ID_GAME) != appId) {
 						s_fpsTarget = PSVS_FPS_COUNTER_TARGET_SHFB;
 						psvsSetRecommendedCasShift(name, sce_paf_strlen(name) + 1);
@@ -48,7 +48,7 @@ namespace tracker
 						psvsSetRecommendedCasShift("game", sizeof("game"));
 					}
 					s_currAppId = appId;
-					appChanged = SCE_TRUE;
+					appChanged = true;
 				}
 			}
 			else {
@@ -58,7 +58,7 @@ namespace tracker
 					psvsSetRecommendedCasShift("main", sizeof("main"));
 					s_fpsTarget = PSVS_FPS_COUNTER_TARGET_SHFB;
 					s_currAppId = -1;
-					appChanged = SCE_TRUE;
+					appChanged = true;
 				}
 			}
 
@@ -93,7 +93,7 @@ namespace tracker
 		return s_currPid;
 	}
 
-	SceVoid ReloadCurrentProfile()
+	void ReloadCurrentProfile()
 	{
 		s_currProfile = psvs::Profile::Load();
 	}
@@ -103,7 +103,7 @@ namespace tracker
 		return s_currProfile;
 	}
 
-	SceInt32 GetFpsCounterTarget()
+	int32_t GetFpsCounterTarget()
 	{
 		return s_fpsTarget;
 	}
@@ -128,7 +128,7 @@ namespace tracker
 		return SCE_OK;
 	}
 
-	SceVoid Init()
+	void Init()
 	{
 		s_currPid = sceKernelGetProcessId();
 		s_currAppName = new wstring(L"main");
@@ -148,12 +148,12 @@ namespace tracker
 		SceUID cbid = sceKernelCreateCallback("PSVshellPlus_PCB", 0, PowerCallback, NULL);
 		scePowerRegisterCallback(cbid);
 
-		task::Register(Update, SCE_NULL);
+		common::MainThreadCallList::Register(Update, NULL);
 	}
 
-	SceVoid Term()
+	void Term()
 	{
-		task::Unregister(Update, SCE_NULL);
+		common::MainThreadCallList::Unregister(Update, NULL);
 		delete s_currAppName;
 	}
 }

@@ -19,7 +19,8 @@ namespace psvs
 			HudMode_Off,
 			HudMode_Micro,
 			HudMode_Mini,
-			HudMode_Full
+			HudMode_Full,
+			HudMode_Dev
 		};
 
 		enum Hash
@@ -55,65 +56,13 @@ namespace psvs
 			psvs_text_impose_cas_value = 0xd0bd439b
 		};
 
-		class ControlButtonCB : public paf::ui::EventCallback
-		{
-		public:
+		static void ControlButtonCBFun(int32_t type, paf::ui::Handler *self, paf::ui::Event *e, void *userdata);
+		static void ProfileButtonCBFun(int32_t type, paf::ui::Handler *self, paf::ui::Event *e, void *userdata);
+		static void LockCBFun(int32_t type, paf::ui::Handler *self, paf::ui::Event *e, void *userdata);
 
-			ControlButtonCB(Impose *obj)
-			{
-				eventHandler = ControlButtonCBFun;
-				pUserData = obj;
-			};
-
-			virtual ~ControlButtonCB()
-			{
-
-			};
-
-			static SceVoid ControlButtonCBFun(SceInt32 eventId, paf::ui::Widget *self, SceInt32 a3, ScePVoid pUserData);
-
-		};
-
-		class ProfileButtonCB : public paf::ui::EventCallback
-		{
-		public:
-
-			ProfileButtonCB(paf::ui::Widget *widget)
-			{
-				eventHandler = ProfileButtonCBFun;
-				pUserData = widget;
-			};
-
-			virtual ~ProfileButtonCB()
-			{
-
-			};
-
-			static SceVoid ProfileButtonCBFun(SceInt32 eventId, paf::ui::Widget *self, SceInt32 a3, ScePVoid pUserData);
-
-		};
-
-		class LockCB : public paf::ui::EventCallback
-		{
-		public:
-
-			LockCB()
-			{
-				eventHandler = LockCBFun;
-			};
-
-			virtual ~LockCB()
-			{
-
-			};
-
-			static SceVoid LockCBFun(SceInt32 eventId, paf::ui::Widget *self, SceInt32 a3, ScePVoid pUserData);
-
-		};
-
-		static SceVoid Update(ScePVoid arg);
+		static void Update(void *arg);
 		static Hud::Position GetHudPosition();
-		static SceVoid SetHudPosition(Hud::Position pos);
+		static void SetHudPosition(Hud::Position pos);
 
 		Impose(paf::Plugin *plugin, paf::ui::Box *root);
 
@@ -134,6 +83,6 @@ namespace psvs
 		paf::ui::Text *cas;
 
 		PSVSClockFrequency oldClock;
-		SceUInt32 oldTick;
+		uint32_t oldTick;
 	};
 }

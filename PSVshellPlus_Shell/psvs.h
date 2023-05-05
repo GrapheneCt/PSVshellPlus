@@ -68,6 +68,10 @@ typedef struct PSVSVenezia {
 	SceInt32 peak;
 } PSVSVenezia;
 
+typedef struct PSVSBattery {
+	SceInt32 current;
+} PSVSBattery;
+
 typedef struct PSVSCpu {
 	SceInt32 avg[SCE_KERNEL_MAX_CPU];
 	SceInt32 peak;
@@ -87,6 +91,7 @@ SceBool psvsClockFrequencyIsLockedProc(ScePID pid, PsvsLockDevice type);
 SceInt32 psvsSetRecommendedCasShift(char *name, SceInt32 namelen);
 SceVoid psvsSetClockingPid(SceUID pid);
 SceInt32 psvsGetVeneziaInfo(PSVSVenezia *data);
+SceInt32 psvsGetBatteryInfo(PSVSBattery *data);
 
 SceVoid psvsCalcCpu();
 SceInt32 psvsGetCpu(PSVSCpu *cpu);

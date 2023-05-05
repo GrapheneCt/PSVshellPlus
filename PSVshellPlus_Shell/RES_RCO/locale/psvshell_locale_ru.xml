@@ -2,6 +2,7 @@
 <stringset>
   <string src="CPU:" id="psvs_msg_cpu" />
   <string src="VNZ:" id="psvs_msg_vnz" />
+  <string src="BAT:" id="psvs_msg_bat" />
   <string src="GPU:" id="psvs_msg_gpu" />
   <string src="BUS:" id="psvs_msg_bus" />
   <string src="XBAR:" id="psvs_msg_xbar" />
@@ -17,6 +18,7 @@
   <string src="FPS" id="psvs_msg_hud_micro" />
   <string src="Мини" id="psvs_msg_hud_mini" />
   <string src="Полный" id="psvs_msg_hud_full" />
+  <string src="Dev" id="psvs_msg_hud_dev" />
   <string src="Поз.:" id="psvs_msg_hud_pos" />
   <string src="В-Л" id="psvs_msg_hud_pos_ul" />
   <string src="В-П" id="psvs_msg_hud_pos_ur" />

@@ -15,6 +15,7 @@ namespace psvs
 			BaseType_None,
 			BaseType_Mini,
 			BaseType_Full,
+			BaseType_Dev,
 		};
 
 		enum Position
@@ -30,19 +31,21 @@ namespace psvs
 			psvs_page_hud = 0x6c5a295a,
 			psvs_template_hud_bg_mini = 0x6147e689,
 			psvs_template_hud_bg_full = 0x34b71af6,
+			psvs_template_hud_bg_dev = 0xddc6d9a0,
 		};
 
 		static Hud *GetCurrentHud();
-		static SceVoid SetCasShift(SceInt32 shift);
+		static void SetCasShift(int32_t shift);
 
 		Hud(BaseType type);
 
 		virtual ~Hud();
-		virtual SceVoid SetPosition(Position pos) = 0;
+		virtual void SetPosition(Position pos) = 0;
 
 	protected:
 
 		paf::ui::Widget *root;
+		paf::ui::Scene *coreRoot;
 
 	};
 
@@ -56,18 +59,18 @@ namespace psvs
 			psvs_text_fps_micro = 0x8d7c94a7,
 		};
 
-		static SceVoid Update(ScePVoid arg);
+		static void Update(void *arg);
 
 		HudMicro();
 
 		virtual ~HudMicro();
-		virtual SceVoid SetPosition(Position pos);
+		virtual void SetPosition(Position pos);
 
 	protected:
 
 		paf::ui::Text *fps;
 
-		SceInt32 oldFps;
+		int32_t oldFps;
 	};
 
 	class HudMini : public Hud
@@ -85,12 +88,12 @@ namespace psvs
 			psvs_text_fps = 0x7a26c57e,
 		};
 
-		static SceVoid Update(ScePVoid arg);
+		static void Update(void *arg);
 
 		HudMini(Hud::BaseType type = Hud::BaseType_Mini);
 
 		virtual ~HudMini();
-		virtual SceVoid SetPosition(Position pos);
+		virtual void SetPosition(Position pos);
 
 	protected:
 
@@ -98,7 +101,7 @@ namespace psvs
 		paf::ui::Text *cpuPeak;
 		paf::ui::Text *fps;
 
-		SceInt32 oldFps;
+		int32_t oldFps;
 	};
 
 	class HudFull : public HudMini
@@ -106,20 +109,9 @@ namespace psvs
 	public:
 
 		#define PSVS_FULL_UPDATE_WINDOW_USEC	(100000)
-		#define PSVS_VNZ_UPDATE_WINDOW_USEC		(1000)
 
 		enum Hash
 		{
-			psvs_template_hud_vnz = 0x77a08140,
-			psvs_text_vnz_0 = 0x7524c263,
-			psvs_text_vnz_1 = 0x56c14879,
-			psvs_text_vnz_2 = 0x03cd5e60,
-			psvs_text_vnz_3 = 0x8c6b209e,
-			psvs_text_vnz_4 = 0x98e73415,
-			psvs_text_vnz_5 = 0xd8c59975,
-			psvs_text_vnz_6 = 0x7cb8ea8d,
-			psvs_text_vnz_7 = 0xf646c3a1,
-			psvs_text_vnz_peak = 0xebc15716,
 			psvs_template_hud_full = 0x367de75c,
 			psvs_text_ram_used = 0xe161c101,
 			psvs_text_ram_total = 0x588ba69b,
@@ -132,19 +124,17 @@ namespace psvs
 			psvs_text_app = 0xee6b6287,
 		};
 
-		static SceVoid Update(ScePVoid arg);
+		static void Update(void *arg);
 
 		HudFull();
 
 		virtual ~HudFull();
-		virtual SceVoid SetPosition(Position pos);
+		virtual void SetPosition(Position pos);
 
-		static SceVoid SetMemLabel(SceUInt32 used, SceUInt32 total, paf::ui::Text *usedText, paf::ui::Text *totalText);
+		static void SetMemLabel(uint32_t used, uint32_t total, paf::ui::Text *usedText, paf::ui::Text *totalText);
 
 	protected:
 
-		paf::ui::Text *vnz[8];
-		paf::ui::Text *vnzPeak;
 		paf::ui::Text *ramUsed;
 		paf::ui::Text *cdramUsed;
 		paf::ui::Text *phyUsed;
@@ -155,9 +145,63 @@ namespace psvs
 		paf::ui::Text *cdlgTotal;
 		paf::ui::Text *app;
 
-		SceUInt32 memTick;
+		uint32_t memTick;
+		PSVSMem oldMem;
+	};
+
+	class HudDev : public HudMini
+	{
+	public:
+
+		#define PSVS_VNZ_UPDATE_WINDOW_USEC		(1000)
+		#define PSVS_BAT_UPDATE_WINDOW_USEC		(500000)
+
+		enum Hash
+		{
+			psvs_template_hud_dev = 0xf6e17467,
+			psvs_text_vnz_0 = 0x7524c263,
+			psvs_text_vnz_1 = 0x56c14879,
+			psvs_text_vnz_2 = 0x03cd5e60,
+			psvs_text_vnz_3 = 0x8c6b209e,
+			psvs_text_vnz_4 = 0x98e73415,
+			psvs_text_vnz_5 = 0xd8c59975,
+			psvs_text_vnz_6 = 0x7cb8ea8d,
+			psvs_text_vnz_7 = 0xf646c3a1,
+			psvs_text_vnz_peak = 0xebc15716,
+			psvs_text_bat_cur = 0x18869f58,
+		};
+
+		static void Update(void *arg);
+
+		HudDev();
+
+		virtual ~HudDev();
+		virtual void SetPosition(Position pos);
+
+		static void SetMemLabel(uint32_t used, uint32_t total, paf::ui::Text *usedText, paf::ui::Text *totalText);
+
+	protected:
+
+		paf::ui::Text *vnz[8];
+		paf::ui::Text *vnzPeak;
+		paf::ui::Text *batCur;
+		paf::ui::Text *ramUsed;
+		paf::ui::Text *cdramUsed;
+		paf::ui::Text *phyUsed;
+		paf::ui::Text *cdlgUsed;
+		paf::ui::Text *ramTotal;
+		paf::ui::Text *cdramTotal;
+		paf::ui::Text *phyTotal;
+		paf::ui::Text *cdlgTotal;
+		paf::ui::Text *app;
+
+		uint32_t memTickCommon;
+		uint32_t memTickVnzUpd;
+		uint32_t memTickBat;
+		bool vnzNeedUpdate;
 		PSVSMem oldMem;
 		PSVSVenezia oldVnz;
+		PSVSBattery oldBat;
 	};
 
 }

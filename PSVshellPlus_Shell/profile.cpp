@@ -10,7 +10,7 @@
 
 using namespace paf;
 
-SceVoid psvs::Profile::Init()
+void psvs::Profile::Init()
 {
 	Dir::Create(PSVS_PROFILES_DIR);
 }
@@ -60,9 +60,9 @@ psvs::Profile *psvs::Profile::Load()
 {
 	string path = PSVS_PROFILES_DIR;
 	string path2;
-	Profile *prof = SCE_NULL;
+	Profile *prof = NULL;
 
-	ccc::UTF16toUTF8(psvs::tracker::GetCurrentAppName(), &path2);
+	common::Utf16ToUtf8(*psvs::tracker::GetCurrentAppName(), &path2);
 
 	path += path2;
 
@@ -75,29 +75,29 @@ psvs::Profile *psvs::Profile::Load()
 	if (prof)
 		delete prof;
 
-	return SCE_NULL;
+	return NULL;
 }
 
-SceVoid psvs::Profile::Delete()
+void psvs::Profile::Delete()
 {
 	string path = PSVS_PROFILES_DIR;
 	string path2;
 
-	ccc::UTF16toUTF8(psvs::tracker::GetCurrentAppName(), &path2);
+	common::Utf16ToUtf8(*psvs::tracker::GetCurrentAppName(), &path2);
 
 	path += path2;
 
 	LocalFile::RemoveFile(path.c_str());
 }
 
-SceVoid psvs::Profile::Save()
+void psvs::Profile::Save()
 {
 	LocalFile file;
 	LocalFile::OpenArg oarg;
 	string path = PSVS_PROFILES_DIR;
 	string path2;
 
-	ccc::UTF16toUTF8(psvs::tracker::GetCurrentAppName(), &path2);
+	common::Utf16ToUtf8(*psvs::tracker::GetCurrentAppName(), &path2);
 
 	path += path2;
 

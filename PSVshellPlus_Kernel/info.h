@@ -7,4 +7,6 @@
 
 int(*sceKernelGetPhyMemPartInfoCore)(SceKernelPhyMemPart *pPhyMemPart, ScePhyMemPartInfoCore *pInfo);
 
+int(*sceSysconGetBatteryCurrent)(SceInt32 *res);
+
 SceVoid psvsCalcFps();

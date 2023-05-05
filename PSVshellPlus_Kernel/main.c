@@ -19,7 +19,9 @@ static SceUID s_reqPid = -1;
 
 static SceUInt32 *scePowerKPLSKey = NULL;
 
-int(*scePervasiveArmSetClock)(int mul, int ndiv);
+static SceUInt32 **ScePervasiveBaseClk = NULL;
+
+int(*scePervasiveArmClockSelect)(int mul, int ndiv);
 
 SceVoid psvsSetFpsCounterTarget(SceInt32 target)
 {
@@ -67,7 +69,7 @@ int scePowerSetArmClockFrequency_patched(int clock)
 			ret = psvsClockFrequencyLockProc(pid, PSVS_500_MHZ_KEY);
 			if (ret == SCE_OK) {
 				// Apply mul:div (15:0)
-				ret = scePervasiveArmSetClock(15, 16 - 0);
+				ret = scePervasiveArmClockSelect(15, 16 - 0);
 			}
 			
 			return ret;
@@ -143,6 +145,11 @@ int __module_start(SceSize args, const void * argp)
 
 	module_get_offset(KERNEL_PID, tai_info.modid, 1, 0, (uintptr_t *)&scePowerKPLSKey);
 
+	tai_info.size = sizeof(tai_module_info_t);
+	taiGetModuleInfoForKernel(KERNEL_PID, "SceLowio", &tai_info);
+
+	module_get_offset(KERNEL_PID, tai_info.modid, 1, 0xa0, (uintptr_t *)&ScePervasiveBaseClk);
+
 	s_hookId[0] = taiHookFunctionExportForKernel(KERNEL_PID, &s_hookRef[0],
 		"SceDisplay", 0x9FED47AC, 0x16466675, sceDisplaySetFrameBufInternal_patched);
 
@@ -164,7 +171,10 @@ int __module_start(SceSize args, const void * argp)
 	}
 
 	module_get_export_func(KERNEL_PID,
-		"SceLowio", 0xE692C727, 0xE9D95643, (uintptr_t *)&scePervasiveArmSetClock);
+		"SceLowio", 0xE692C727, 0xE9D95643, (uintptr_t *)&scePervasiveArmClockSelect);
+
+	module_get_export_func(KERNEL_PID,
+		"SceSyscon", 0x60A35F64, 0x0826BA07, (uintptr_t *)&sceSysconGetBatteryCurrent);
 
 	/*
 	ret = module_get_export_func(KERNEL_PID,
@@ -227,7 +237,7 @@ int __module_start(SceSize args, const void * argp)
 
 	const SceUInt8 nop[] = { 0x00, 0xBF };
 	s_injectId[0] = taiInjectAbsForKernel(KERNEL_PID,
-		(void *)((uintptr_t)scePervasiveArmSetClock + 0x1D), &nop, 2);
+		(void *)((uintptr_t)scePervasiveArmClockSelect + 0x1D), &nop, 2);
 
 	return SCE_KERNEL_START_SUCCESS;
 }

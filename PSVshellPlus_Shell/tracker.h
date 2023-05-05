@@ -11,14 +11,14 @@ namespace psvs
 	{
 		#define PSVS_APP_UPDATE_WINDOW_USEC  (100000)
 
-		SceVoid Init();
-		SceVoid Term();
-		SceVoid Update(ScePVoid arg);
+		void Init();
+		void Term();
+		void Update(void *arg);
 		paf::wstring *GetCurrentAppName();
 		ScePID GetCurrentPID();
-		SceVoid ReloadCurrentProfile();
+		void ReloadCurrentProfile();
 		psvs::Profile *GetCurrentProfile();
-		SceInt32 GetFpsCounterTarget();
+		int32_t GetFpsCounterTarget();
 		SceInt32 PowerCallback(SceUID notifyId, SceInt32 notifyCount, SceInt32 notifyArg, void *pCommon);
 	}
 }

@@ -106,7 +106,7 @@
 ;-lSceProcessmgrForDriver_stub;-lSceSysrootForKernel_stub;-ltaihenForKernel_stub;-ltaihenModuleUtils_stub;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/vdsuite-pubprx.exe" --compress "$(LocalDebuggerCommand)" "$(OutDir)_$(TargetName).skprx"
+      <Command>"$(SCE_PSP2_SDK_DIR)/host_tools/build/bin/vdsuite-pubprx.exe" --compress "$(LocalDebuggerCommand)" "$(OutDir)$(TargetName).skprx"
 "$(SCE_PSP2_SDK_DIR)\host_tools\build\bin\armlibgen.exe" --dump lib.emd --stub-archive</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
